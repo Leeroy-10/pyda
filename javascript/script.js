@@ -102,3 +102,17 @@ if (moreToggle) {
     });
 }
 
+// Close mobile menu when clicking any nav link EXCEPT the MORE dropdown toggle
+const navLinks = document.querySelectorAll('.nav-list a:not(.dropdown-toggle)');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 992) {
+            // Tiny delay for smoother feel on anchor navigation
+            setTimeout(() => {
+                navEl.classList.remove('nav--open');
+                hamburgerEl.classList.remove('hamburger--open');
+            }, 150);
+        }
+    });
+});
