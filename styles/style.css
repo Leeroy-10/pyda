@@ -37,6 +37,11 @@ body {
     line-height: 1.5;
     position: relative;
     min-height: 100vh;
+    visibility: hidden;
+}
+
+body.fonts-loaded {
+    visibility: visible;
 }
 
 .goldtitles,
@@ -282,11 +287,11 @@ section {
 
 #home     { min-height: 70vh; background: rgba(255, 230, 0, 0.1); }
 #about    { min-height: 90vh; background: var(--dark); color: var(--white); }
-#theteam  { min-height: 90vh; background: var(--white); color: var(--black); }
+#theteam  { min-height: 90vh; background: var(--text-light); color: var(--black); }
 #gallery  { min-height: 80vh; background: var(--dark); color: var(--white); }
-#timetable { min-height: 90vh; background: var(--white); }
+#timetable { min-height: 90vh; background: var(--text-light); }
 #contact  { min-height: 90vh; background: var(--dark); color: var(--white); }
-#sponsors { min-height: 85vh; background: var(--white); color: var(--black); }
+#sponsors { min-height: 85vh; background: var(--text-light); color: var(--black); }
 
 /* ====================================
    HOME
@@ -456,7 +461,7 @@ section {
 }
 
 .gallery-column img:hover {
-    transform: scale(1.01);
+    transform: scale(0.99);
 }
 
 .view-gallery-btn {
@@ -668,17 +673,24 @@ section {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     font-size: 1.2rem;
 }
 
 .contact-item i {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--gold);
 }
 
-.contact-item a {
+/* .contact-item a {
   border-bottom: #ffffff88 dashed 1px;
+} */
+
+.contact-item a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
 }
 
 /* ====================================
@@ -758,6 +770,128 @@ section {
     font-size: 1rem;
 }
 
+/* Footer - News page only */
+.page-footer {
+    background: var(--text-light);
+    color: var(--black);
+    padding: 40px 0 20px;
+    text-align: center;
+}
+
+/* .page-footer .back-to-top {
+    margin-bottom: 20px;
+} */
+
+/* ====================================
+   NEWS CARDS – Expandable
+   ==================================== */
+
+.news-section {
+    padding: 50px 0 10px;
+    background: var(--text-light);
+    color: var(--white);
+    text-align: center;
+}
+
+.news-section .blacktitles {
+    margin-bottom: 50px;
+    display: inline-block;
+}
+
+.news-card {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 6px solid var(--gold);
+    transition: transform 0.2s ease;
+    text-align: left;
+    color: var(--white);
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+}
+
+.news-date {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.news-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+}
+
+.news-excerpt,
+.news-full {
+    margin-bottom: 15px;
+}
+
+/* Hide the full content by default */
+.news-full {
+    display: none;
+}
+
+/* When the card is expanded */
+.news-card.is-expanded .news-full {
+    display: block;
+}
+
+.news-card.is-expanded .news-excerpt {
+    display: none;
+}
+
+.news-images {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.news-images .news-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    border: 3px solid var(--white);
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Images inside news */
+.news-image {
+    width: 500px;
+    max-width: 500px;
+    height: auto;
+    margin: 20px 0;
+    border: 3px solid var(--white);
+    display: block;
+}
+
+/* Toggle button */
+.news-toggle {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.news-toggle:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
 /* ====================================
    MOBILE FIRST – ≤ 992px
    ==================================== */
@@ -770,6 +904,7 @@ html, body { width: 100%; overflow-x: hidden; }
 .master-bg { top: 150px; }
 
 .top-bar-content { font-size: 0.7rem; gap: 5px; }
+
 
 
 /* ====================================
@@ -1030,6 +1165,7 @@ margin-right: calc(-50vw + 50%) !important;
    SPONSORS SECTION MOBILE
    ==================================== */
 
+
 #sponsors {
     padding: 30px 0 40px;
 }
@@ -1055,12 +1191,50 @@ margin-right: calc(-50vw + 50%) !important;
     .designed-by {
     font-size: 0.9rem;
 }
-}
+
 
 /* ====================================
-   MOBILE FIRST – > 1200px
+   NEWS SECTION MOBILE
    ==================================== */
-@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+.news-section {
+    padding: 40px 0 30px;
+}
+
+.news-section .blacktitles {
+    margin-bottom: 30px;
+}
+
+.news-card {
+    padding: 22px 18px;
+    margin-bottom: 25px;
+}
+
+.news-title {
+    font-size: 1.3rem;
+}
+
+.news-image {
+    width: 100%;
+    max-width: 100%;
+}
+
+.news-toggle {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+}
+    .news-images {
+        grid-template-columns: 1fr;   /* force single column */
+        gap: 15px;
+    }
+}
+
+
+/* ====================================
+   MOBILE FIRST – > 1350px
+   ==================================== */
+@media only screen and (min-width: 993px) and (max-width: 1350px) {
 
 html, body { width: 100%; overflow-x: hidden; }
 
