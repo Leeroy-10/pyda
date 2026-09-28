@@ -116,3 +116,31 @@ navLinks.forEach(link => {
         }
     });
 });
+
+// News expand / collapse
+document.addEventListener('DOMContentLoaded', function () {
+    const toggles = document.querySelectorAll('.news-toggle');
+
+    toggles.forEach(button => {
+        button.addEventListener('click', function () {
+            const card = this.closest('.news-card');
+            const isExpanded = card.classList.contains('is-expanded');
+
+            // Toggle the expanded class
+            card.classList.toggle('is-expanded');
+
+            // Change button text
+            this.textContent = isExpanded ? 'Read more →' : 'Read less ↑';
+        });
+    });
+});
+
+// Hide content on load to avoid FOUT
+document.fonts.ready.then(function () {
+    document.body.classList.add('fonts-loaded');
+});
+
+
+setTimeout(function () {
+    document.body.classList.add('fonts-loaded');
+}, 1200);
